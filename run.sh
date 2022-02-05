@@ -1,46 +1,63 @@
 Deployment -> ReplicaSet -> Pod
 
-#########
-# LISTING
-#########
+######
+# PODS
+######
 
-# lista replicasets
-kubectl get replicasets
-kubectl get replicaset
+# liga o pod definido em k8s/pod.yaml
+kubectl apply -f k8s/pod.yaml
 
 # lista todos os pods
 kubectl get pods
 kubectl get pod
 kubectl get po
 
-# list todos os deployments
-kubectl get deployments
-kubectl get deployment
+# deletes a pod
+kubectl delete pod <NAME>
 
-##########
-# STARTING
-##########
-
-# liga o pod definido em k8s/pod.yaml
-kubectl apply -f k8s/pod.yaml
+#############
+# REPLICASETS
+#############
 
 # cria o replicaset
 kubectl apply -f k8s/replicaset.yaml
 
+# lista replicasets
+kubectl get replicasets
+kubectl get replicaset
+
+# deletes a replicaset
+kubectl delete replicaset <NAME>
+
+#############
+# DEPLOYMENTS
+#############
+
 # cria o deployment
 kubectl apply -f k8s/deployment.yaml
 
-##########
-# DELETING
-##########
+# list todos os deployments
+kubectl get deployments
+kubectl get deployment
 
-kubectl delete pod <NAME>
+# deletes a deployment
+kubectl delete deployment <NAME>
 
-kubectl delete replicaset <NAME>
+# describe a deployment
+kubectl describe deployment <NAME>
 
-########
-# RANDOM
-########
+# lista as versões do deployment
+kubectl rollout history deployment <NAME>
+
+# reverte o último deployment
+kubectl rollout undo deployment goserver
+
+# reverte o último deployment para uma versão específica
+kubectl rollout undo deployment goserver --to-revision=<NUMBER>
+
+#######
+# OTHER
+#######
 
 # adiciona um mapping da porta 8000 do host para a porta 80 do pod de nome pod/goserver
 kubectl port-forward pod/goserver 8000:80
