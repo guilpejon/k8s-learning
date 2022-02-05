@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: goserver-service
+spec:
+  selector:
+    app: goserver
+  type: NodePort
+  ports:
+  - name: goserver-service
+    port: 80
+    targetPort: 8000 # same as port argument if not explicitely declared
+    protocol: TCP
+    # quem acessar a porta declarada em nodePort de qualquer node da rede vai
+    # cair na porta Port depois
+    nodePort: 30001 # 30000 - 32767
