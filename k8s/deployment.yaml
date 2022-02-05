@@ -18,10 +18,12 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "guilpejon/hello-go:configmap"
+          image: "guilpejon/hello-go:secret"
           envFrom:
             - configMapRef:
                 name: goserver-env
+            - secretRef:
+                name: goserver-secret
           # env:
           #   - name: NAME
           #     valueFrom:
