@@ -55,6 +55,20 @@ kubectl rollout undo deployment goserver
 # reverte o último deployment para uma versão específica
 kubectl rollout undo deployment goserver --to-revision=<NUMBER>
 
+##########
+# SERVICES
+##########
+
+kubectl apply -f k8s/service.yaml
+
+kubectl get services
+kubectl get service
+kubectl get svc
+
+kubectl delete svc <NAME>
+
+kubectl port-forward svc/goserver-service 8000:80
+
 #######
 # OTHER
 #######
