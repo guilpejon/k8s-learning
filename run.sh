@@ -81,3 +81,7 @@ kubectl port-forward pod/goserver 8000:80
 
 # imprime as infos do pod
 kubectl describe pod <NAME>
+
+# rodando a API do k8s
+# http://localhost:8080/api/v1/namespaces/default/services/goserver-service
+kubectl proxy --port=8080
