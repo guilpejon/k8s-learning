@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goserver
+  labels:
+    app: goserver
+spec:
+  selector:
+    matchLabels:
+      app: goserver
+  replicas: 2 # garante que sempre vai ter 2 pods de pé
+  # daqui pra baixo é um copy & paste do pod em k8s/pod.yaml
+  template:
+    metadata:
+      name: "goserver"
+      labels:
+        app: "goserver"
+    spec:
+      containers:
+        - name: goserver
+          image: "guilpejon/hello-go:latest"
