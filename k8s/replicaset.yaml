@@ -18,4 +18,4 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "guilpejon/hello-go:latest"
+          image: "guilpejon/hello-go:port-8000"

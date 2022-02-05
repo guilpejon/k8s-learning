@@ -1,5 +1,8 @@
 Deployment -> ReplicaSet -> Pod
 
+# lista os nodes
+kubectl get nodes
+
 ######
 # PODS
 ######
@@ -67,7 +70,7 @@ kubectl get svc
 
 kubectl delete svc <NAME>
 
-kubectl port-forward svc/goserver-service 8000:80
+kubectl port-forward svc/goserver-service 9000:80
 
 #######
 # OTHER
