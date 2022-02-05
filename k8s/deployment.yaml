@@ -18,4 +18,9 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "guilpejon/hello-go:port-8000"
+          image: "guilpejon/hello-go:envs"
+          env:
+            - name: NAME
+              value: "Guil"
+            - name: AGE
+              value: "31"
