@@ -85,3 +85,6 @@ kubectl describe pod <NAME>
 # rodando a API do k8s
 # http://localhost:8080/api/v1/namespaces/default/services/goserver-service
 kubectl proxy --port=8080
+
+# debugging pod with bash
+kubectl exec -it <POD_NAME> -- bash

@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: goserver
-  replicas: 2 # garante que sempre vai ter 2 pods de pé
+  replicas: 1 # garante que sempre vai ter 2 pods de pé
   # daqui pra baixo é um copy & paste do pod em k8s/pod.yaml
   template:
     metadata:
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "guilpejon/hello-go:envs"
+          image: "guilpejon/hello-go:configmap"
           envFrom:
             - configMapRef:
                 name: goserver-env
@@ -33,3 +33,13 @@ spec:
           #       configMapKeyRef:
           #         name: goserver-env
           #         key: AGE
+          volumeMounts:
+            - mountPath: "/go/myfamily"
+              name: config
+      volumes:
+        - name: config
+          configMap:
+            name: configmap-family
+            items:
+              - key: members
+                path: "family.txt"
