@@ -58,6 +58,9 @@ kubectl rollout undo deployment goserver
 # reverte o último deployment para uma versão específica
 kubectl rollout undo deployment goserver --to-revision=<NUMBER>
 
+# start with watch
+kubectl apply -f k8s/deployment.yaml && watch -n1 kubectl get pods
+
 ##########
 # SERVICES
 ##########
