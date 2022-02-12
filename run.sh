@@ -91,3 +91,11 @@ kubectl proxy --port=8080
 
 # debugging pod with bash
 kubectl exec -it <POD_NAME> -- bash
+
+#####################################
+# LIVENESS, READINESS, STARTUP PROBES
+#####################################
+
+LivenessProbe -> knows when to restart a container
+ReadinessProbe -> knows when a container is ready to start accepting traffic
+StartupProbe -> knows when an application has started
