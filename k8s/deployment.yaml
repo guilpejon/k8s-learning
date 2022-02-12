@@ -18,15 +18,22 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "guilpejon/hello-go:healthz"
-          livenessProbe:
+          image: "guilpejon/hello-go:readiness"
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8000
+          #   periodSeconds: 5
+          #   failureThreshold: 1
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          readinessProbe:
             httpGet:
               path: /healthz
               port: 8000
-            periodSeconds: 5
+            periodSeconds: 3
             failureThreshold: 1
-            timeoutSeconds: 1
-            successThreshold: 1
+            initialDelaySeconds: 10
 
           envFrom:
             - configMapRef:
