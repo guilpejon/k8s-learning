@@ -75,9 +75,9 @@ kubectl delete svc <NAME>
 
 kubectl port-forward svc/goserver-service 9000:80
 
-#######
-# OTHER
-#######
+########
+# RANDOM
+########
 
 # adiciona um mapping da porta 8000 do host para a porta 80 do pod de nome pod/goserver
 kubectl port-forward pod/goserver 8000:80
@@ -91,6 +91,9 @@ kubectl proxy --port=8080
 
 # debugging pod with bash
 kubectl exec -it <POD_NAME> -- bash
+
+# mostra todos os serviços disponíveis na API
+kubectl get apiservices
 
 #####################################
 # LIVENESS, READINESS, STARTUP PROBES
