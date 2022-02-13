@@ -18,7 +18,17 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "guilpejon/hello-go:readiness-and-liveness"
+          image: "guilpejon/hello-go:stress-test"
+
+          resources:
+            requests: # MINIMUM that the pod needs
+              # 1 vCPU -> 1000m (milicores)
+              # Usage -> 500m (milicores) or 0.5 (percentage)
+              cpu: 100m
+              memory: 20Mi # 20 Mb
+            limits: # MAXIMUM that the pod can use
+              cpu: 500m
+              memory: 25Mi
 
           startupProbe:
             httpGet:

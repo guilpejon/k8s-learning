@@ -95,6 +95,9 @@ kubectl exec -it <POD_NAME> -- bash
 # mostra todos os serviços disponíveis na API
 kubectl get apiservices
 
+# check pod's memory and cpu usage
+kubectl top pod <POD_NAME>
+
 #####################################
 # LIVENESS, READINESS, STARTUP PROBES
 #####################################
@@ -102,3 +105,13 @@ kubectl get apiservices
 LivenessProbe -> knows when to restart a container
 ReadinessProbe -> knows when a container is ready to start accepting traffic
 StartupProbe -> knows when an application has started
+
+#############
+# STRESS TEST
+#############
+
+# run a stress test with fortio
+# -c -> connections
+# -t -> how long to run
+# -qps -> queries per second
+kubectl run -it fortio --rm --image=fortio/fortio -- load -qps 800 -t 120s -c 70 "http://goserver-service/healthz"
