@@ -21,6 +21,12 @@ kubectl exec -it <POD_NAME> -- bash
 # check pod's memory and cpu usage
 kubectl top pod <POD_NAME>
 
+# imprime as infos do pod
+kubectl describe pod <NAME>
+
+# adiciona um mapping da porta 8000 do host para a porta 80 do pod de nome pod/goserver
+kubectl port-forward pod/goserver 8000:80
+
 #############
 # REPLICASETS
 #############
@@ -126,15 +132,12 @@ kubectl get nodes
 kubectl get node
 kubectl get no
 
-# adiciona um mapping da porta 8000 do host para a porta 80 do pod de nome pod/goserver
-kubectl port-forward pod/goserver 8000:80
-
-# imprime as infos do pod
-kubectl describe pod <NAME>
-
 # rodando a API do k8s
 # http://localhost:8080/api/v1/namespaces/default/services/goserver-service
 kubectl proxy --port=8080
 
 # mostra todos os serviços disponíveis na API
 kubectl get apiservices
+
+# manualy scale pods
+kubectl scale statefulset mysql --replicas=5
