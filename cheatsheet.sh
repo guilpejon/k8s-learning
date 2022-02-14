@@ -1,8 +1,5 @@
 Deployment -> ReplicaSet -> Pod
 
-# lista os nodes
-kubectl get nodes
-
 ######
 # PODS
 ######
@@ -17,6 +14,12 @@ kubectl get po
 
 # deletes a pod
 kubectl delete pod <NAME>
+
+# debugging pod with bash
+kubectl exec -it <POD_NAME> -- bash
+
+# check pod's memory and cpu usage
+kubectl top pod <POD_NAME>
 
 #############
 # REPLICASETS
@@ -75,28 +78,26 @@ kubectl delete svc <NAME>
 
 kubectl port-forward svc/goserver-service 9000:80
 
-########
-# RANDOM
-########
+#########
+# VOLUMES
+#########
 
-# adiciona um mapping da porta 8000 do host para a porta 80 do pod de nome pod/goserver
-kubectl port-forward pod/goserver 8000:80
+# check storage classes
+# changes based on provider (AWS, GCP, etc)
+kubectl get storageclass
 
-# imprime as infos do pod
-kubectl describe pod <NAME>
+# list persisent volume claims
+kubectl get pvc
 
-# rodando a API do k8s
-# http://localhost:8080/api/v1/namespaces/default/services/goserver-service
-kubectl proxy --port=8080
+##########
+# CONTEXTS
+##########
 
-# debugging pod with bash
-kubectl exec -it <POD_NAME> -- bash
+# contexts is basically a cluster, user and namespace
+kubectl config get-contexts
 
-# mostra todos os serviços disponíveis na API
-kubectl get apiservices
-
-# check pod's memory and cpu usage
-kubectl top pod <POD_NAME>
+# change current context
+kubectl config use-context <CONTEXT_NAME>
 
 #####################################
 # LIVENESS, READINESS, STARTUP PROBES
@@ -115,3 +116,25 @@ StartupProbe -> knows when an application has started
 # -t -> how long to run
 # -qps -> queries per second
 kubectl run -it fortio --rm --image=fortio/fortio -- load -qps 800 -t 120s -c 70 "http://goserver-service/healthz"
+
+########
+# RANDOM
+########
+
+# lista os nodes
+kubectl get nodes
+kubectl get node
+kubectl get no
+
+# adiciona um mapping da porta 8000 do host para a porta 80 do pod de nome pod/goserver
+kubectl port-forward pod/goserver 8000:80
+
+# imprime as infos do pod
+kubectl describe pod <NAME>
+
+# rodando a API do k8s
+# http://localhost:8080/api/v1/namespaces/default/services/goserver-service
+kubectl proxy --port=8080
+
+# mostra todos os serviços disponíveis na API
+kubectl get apiservices
