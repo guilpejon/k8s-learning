@@ -3,9 +3,9 @@ kind: StatefulSet
 metadata:
   name: mysql
 spec:
+  replicas: 4
   serviceName: mysql-h # h means headless
   podManagementPolicy: Parallel # parallel do not scale/delete in order
-  replicas: 3
   selector:
     matchLabels:
       app: mysql
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: mysql
+          image: mysql/mysql-server:8.0.23 # this version runs in arm64
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: root
